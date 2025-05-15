@@ -1,0 +1,32 @@
+services:
+  nockchain:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nockchain
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+    # 添加DNS配置
+    dns:
+      - 8.8.8.8
+      - 114.114.114.114
+    # 添加网络相关设置
+    networks:
+      - nockchain-net
+    deploy:
+      resources:
+        limits:
+          cpus: '6.0'
+          memory: 16G
+    # 允许指定命令参数，例如: docker-compose run nockchain genWallet
+    entrypoint: ["/usr/local/bin/docker-entrypoint.sh"]
+    command: genWallet
+    environment:
+      - RUST_LOG=info
+      - MINIMAL_LOG_FORMAT=true
+
+# 定义网络
+networks:
+  nockchain-net:
+    driver: bridge 
