@@ -1,6 +1,11 @@
 # NockChain Docker 使用教程
 
+✈️ t.me/Web3um
+推特: https://x.com/m7ricks/
+WX: WoKYJ_2001
 本教程将指导您如何使用 Docker Compose 来部署和管理 NockChain 节点。
+![image](https://github.com/user-attachments/assets/a5cc0e60-5a14-4c58-8d44-493fad895e32)
+
 
 ## 前提条件
 
