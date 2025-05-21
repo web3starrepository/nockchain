@@ -6,6 +6,19 @@
 本教程将指导您如何使用 Docker Compose 来部署和管理 NockChain 节点。
 ![image](https://github.com/user-attachments/assets/a5cc0e60-5a14-4c58-8d44-493fad895e32)
 
+# 方法一 免编译
+- 我已经使用action 给大家编译好了 直接拉取即可
+- ![image](https://github.com/user-attachments/assets/a55e9984-e581-4cab-9698-59f4f600b154)
+
+- amd64
+```shell
+docker pull web3starrepository/nockchain:latest
+```
+
+- arm64
+```shell
+docker pull web3starrepository/nockchain:arm64-latest
+```
 
 ## 前提条件
 
