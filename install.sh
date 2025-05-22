@@ -191,12 +191,28 @@ function install_nock() {
     echo -e "${GREEN}✅ 已设置编译线程数为：${BLUE}$thread_count${NC}"
     echo -e "${CYAN}🔄 正在使用优化的编译设置...${NC}"
 
-    # 克隆 nockchain 仓库并进入目录
-    echo -e "${CYAN}🧹 正在清理旧的 nockchain 和 .nockapp 目录...${NC}"
-    rm -rf nockchain .nockapp
-    echo -e "${CYAN}📥 正在克隆 nockchain 仓库...${NC}"
-    git clone https://github.com/zorp-corp/nockchain
-    cd nockchain || { echo -e "${RED}无法进入 nockchain 目录，克隆可能失败${NC}"; exit 1; }
+    # 检查本地是否存在 nockchain 目录
+    if [ -d "nockchain" ]; then
+        echo -e "${CYAN}📂 检测到本地 nockchain 目录，将使用本地版本...${NC}"
+        cd nockchain || { echo -e "${RED}无法进入 nockchain 目录${NC}"; exit 1; }
+        
+        # 检查是否需要更新
+        echo -e "${YELLOW}❓ 是否要更新本地 nockchain 仓库？[y/N]${NC}"
+        read -r update_repo
+        if [[ "$update_repo" =~ ^[Yy]$ ]]; then
+            echo -e "${CYAN}🔄 正在更新本地仓库...${NC}"
+            git pull || { echo -e "${RED}更新失败，将使用当前版本${NC}"; }
+        else
+            echo -e "${CYAN}⏭️ 跳过更新，使用当前版本${NC}"
+        fi
+    else
+        # 克隆 nockchain 仓库
+        echo -e "${CYAN}🧹 正在清理旧的 .nockapp 目录...${NC}"
+        rm -rf .nockapp
+        echo -e "${CYAN}📥 正在克隆 nockchain 仓库...${NC}"
+        git clone https://github.com/zorp-corp/nockchain
+        cd nockchain || { echo -e "${RED}无法进入 nockchain 目录，克隆可能失败${NC}"; exit 1; }
+    fi
 
     # 执行 make install-hoonc
     echo -e "${CYAN}🔧 正在执行 make install-hoonc...${NC}"
