@@ -14,7 +14,7 @@
 
 ### 1. 下载安装脚本
 ```bash
-wget https://raw.githubusercontent.com/zorp-corp/nockchain/main/install.sh
+wget https://raw.githubusercontent.com/web3starrepository/nockchain/master/install.sh
 chmod +x install.sh
 ```
 
